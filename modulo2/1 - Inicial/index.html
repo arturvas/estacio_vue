@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TODOLIST</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="app">
+      <div id="wrapper">
+        <h1>TODO.LIST</h1>
+        <div id="form-wrapper">
+          <div id="o-form">
+            <input type="text" id="text-novo-item" />
+            <div>
+              <input type="checkbox" id="is-importante" />
+              <label for="is-importante"> Importante</label><br />
+            </div>
+            <button>Salvar</button>
+          </div>
+          <p id="contagem"></p>
+        </div>
+
+        <div id="list-wrapper">
+          <!-- 
+                Para cada item da lista, devemos ter uma div.
+                Essa div terá a class item, obrigatoriamente
+                Dentro dela teremos um (p)aragrafo
+                E dentro dele escrito um texto do item.
+             -->
+          <div class="item" v-for="item in lista">
+            <p class="texto-item" v-text="item in lista"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@3.0.0-rc.5/dist/vue.global.js"></script>
+    <script>
+      Vue.createApp({
+        data() {
+          return {
+            lista: [
+              {
+                texto: "Item importante",
+                importante: true,
+                feito: false,
+              },
+              {
+                texto: "Item importante",
+                importante: true,
+                feito: false,
+              },
+              {
+                texto: "Item importante",
+                importante: true,
+                feito: false,
+              },
+            ],
+          };
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
