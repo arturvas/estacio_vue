@@ -25,15 +25,15 @@
         </div>
 
         <div id="list-wrapper">
-          <!-- 
-                Para cada item da lista, devemos ter uma div.
-                Essa div terá a class item, obrigatoriamente
-                Dentro dela teremos um (p)aragrafo
-                E dentro dele escrito um texto do item.
-             -->
-          <div class="item" v-for="item in lista">
-            <p class="texto-item" v-text="item in lista"></p>
-          </div>
+            <div class="item"
+                v-bind:class="{importante: item.importante, feito: item.feito}"
+                v-for="item in lista"
+                v-on:click="item.feito = !item.feito"
+            >
+                <p class="texto-item" v-text="item.texto"></p>
+            </div>
+        </div>
+
         </div>
       </div>
     </div>
@@ -49,13 +49,28 @@
                 feito: false,
               },
               {
-                texto: "Item importante",
-                importante: true,
+                texto: "Item feito",
+                importante: false,
+                feito: true,
+              },
+              {
+                texto: "Item a fazer",
+                importante: false,
                 feito: false,
               },
               {
-                texto: "Item importante",
+                texto: "Item importante feito",
                 importante: true,
+                feito: true,
+              },
+              {
+                texto: "Item a fazer",
+                importante: false,
+                feito: false,
+              },
+              {
+                texto: "Item a fazer",
+                importante: false,
                 feito: false,
               },
             ],
