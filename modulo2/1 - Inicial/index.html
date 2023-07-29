@@ -25,15 +25,15 @@
         </div>
 
         <div id="list-wrapper">
-            <div class="item"
-                v-bind:class="{importante: item.importante, feito: item.feito}"
-                v-for="item in lista"
-                v-on:click="item.feito = !item.feito"
-            >
-                <p class="texto-item" v-text="item.texto"></p>
-            </div>
-        </div>
-
+          <div
+            class="item"
+            v-bind:class="{importante: item.importante, feito: item.feito}"
+            v-for="item in lista"
+            v-on:click="item.feito = !item.feito"
+          >
+            <p class="texto-item" v-text="item.texto"></p>
+            <!-- atribua à variável feito no item em questão (item. feito =) o valor contrário ao que ela já possui (!item.feito). -->
+          </div>
         </div>
       </div>
     </div>
