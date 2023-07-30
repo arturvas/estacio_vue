@@ -14,12 +14,22 @@
         <h1>TODO.LIST</h1>
         <div id="form-wrapper">
           <div id="o-form">
-            <input type="text" id="text-novo-item" />
+            <input
+              type="text"
+              id="text-novo-item"
+              v-model="textoNovoItem"
+              @keyup.enter="salvarNovoItem"
+            />
+            <!-- @keyup.enter define a tecla enter como ativador do evento -->
             <div>
-              <input type="checkbox" id="is-importante" />
+              <input
+                type="checkbox"
+                id="is-importante"
+                v-model="novoItemImportante"
+              />
               <label for="is-importante"> Importante</label><br />
             </div>
-            <button>Salvar</button>
+            <button @click="salvarNovoItem">Salvar</button>
           </div>
           <p id="contagem"></p>
         </div>
@@ -32,7 +42,6 @@
             v-on:click="item.feito = !item.feito"
           >
             <p class="texto-item" v-text="item.texto"></p>
-            <!-- atribua à variável feito no item em questão (item. feito =) o valor contrário ao que ela já possui (!item.feito). -->
           </div>
         </div>
       </div>
@@ -40,40 +49,27 @@
     <script src="https://unpkg.com/vue@3.0.0-rc.5/dist/vue.global.js"></script>
     <script>
       Vue.createApp({
+        methods: {
+          // methods = é um atributo que retorna uma ou mais funções (ora chamado função ora métodos)
+          salvarNovoItem() {
+            // salvarNovoItem é uma função
+            let novoItem = {
+              id: new Date().getTime(), // getTime gera número único para cada item. Útil para ser usado com chave
+              texto: this.textoNovoItem,
+              importante: this.novoItemImportante,
+              feito: false,
+            };
+            this.lista.push(novoItem);
+            this.textoNovoItem = "";
+            this.novoItemImportante = false;
+          },
+        },
         data() {
+          // data = é uma função que retorna um atributo
           return {
-            lista: [
-              {
-                texto: "Item importante",
-                importante: true,
-                feito: false,
-              },
-              {
-                texto: "Item feito",
-                importante: false,
-                feito: true,
-              },
-              {
-                texto: "Item a fazer",
-                importante: false,
-                feito: false,
-              },
-              {
-                texto: "Item importante feito",
-                importante: true,
-                feito: true,
-              },
-              {
-                texto: "Item a fazer",
-                importante: false,
-                feito: false,
-              },
-              {
-                texto: "Item a fazer",
-                importante: false,
-                feito: false,
-              },
-            ],
+            textoNovoItem: "",
+            novoItemImportante: false,
+            lista: [{}],
           };
         },
       }).mount("#app");
