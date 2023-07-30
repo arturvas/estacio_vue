@@ -29,7 +29,9 @@
               />
               <label for="is-importante"> Importante</label><br />
             </div>
-            <button @click="salvarNovoItem">Salvar</button>
+            <button @click="salvarNovoItem" v-if="textoNovoItem.length > 0">
+              Salvar
+            </button>
           </div>
           <p id="contagem"></p>
         </div>
@@ -53,15 +55,18 @@
           // methods = é um atributo que retorna uma ou mais funções (ora chamado função ora métodos)
           salvarNovoItem() {
             // salvarNovoItem é uma função
-            let novoItem = {
-              id: new Date().getTime(), // getTime gera número único para cada item. Útil para ser usado com chave
-              texto: this.textoNovoItem,
-              importante: this.novoItemImportante,
-              feito: false,
-            };
-            this.lista.push(novoItem);
-            this.textoNovoItem = "";
-            this.novoItemImportante = false;
+            if (this.textoNovoItem.length > 0) {
+              // condicional se na caixa de texto estiver em branco, nao pode ser adicionado
+              let novoItem = {
+                id: new Date().getTime(), // getTime gera número único para cada item. Útil para ser usado com chave
+                texto: this.textoNovoItem,
+                importante: this.novoItemImportante,
+                feito: false,
+              };
+              this.lista.push(novoItem);
+              this.textoNovoItem = "";
+              this.novoItemImportante = false;
+            }
           },
         },
         data() {
