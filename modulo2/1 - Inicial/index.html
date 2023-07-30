@@ -34,7 +34,7 @@
               Salvar
             </button>
           </div>
-          <p id="contagem">{{ qtdeDigitada }}</p>
+          <p id="contagem">{{ qtdeDigitada }}/20</p>
         </div>
 
         <div id="list-wrapper">
@@ -43,6 +43,7 @@
             v-bind:class="{importante: item.importante, feito: item.feito}"
             v-for="item in lista"
             v-on:click="item.feito = !item.feito"
+            :key="item.id"
           >
             <p class="texto-item" v-text="item.texto"></p>
           </div>
