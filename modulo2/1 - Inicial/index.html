@@ -19,6 +19,7 @@
               id="text-novo-item"
               v-model="textoNovoItem"
               @keyup.enter="salvarNovoItem"
+              maxlength="20"
             />
             <!-- @keyup.enter define a tecla enter como ativador do evento -->
             <div>
@@ -33,7 +34,7 @@
               Salvar
             </button>
           </div>
-          <p id="contagem"></p>
+          <p id="contagem">{{ qtdeDigitada }}</p>
         </div>
 
         <div id="list-wrapper">
@@ -74,8 +75,14 @@
           return {
             textoNovoItem: "",
             novoItemImportante: false,
-            lista: [{}],
+            lista: [],
           };
+        },
+        computed: {
+          qtdeDigitada() {
+            // Propriedade para mostrar de maneira reativa a quantidade de letras digitadas
+            return this.textoNovoItem.length;
+          },
         },
       }).mount("#app");
     </script>
